@@ -1,7 +1,0 @@
-[package]
-name = "nterm"
-version = "0.1.0"
-authors = ["Ben Anderson <gravityscore@gmail.com>"]
-
-[dependencies]
-ncurses = { git = "https://github.com/jeaye/ncurses-rs" }
