@@ -18,7 +18,7 @@ $ brew install --prefix=/usr/local --force ncurses
 Now you need to tell the Rust compiler to look inside `/usr/local` when searching for libraries. Add `/usr/local` to the environment variable `LD_LIBRARY_PATHS`:
 
 ```bash
-$ export LD_LIBRARY_PATHS="$LD_LIBRARY_PATHS:/usr/local/lib
+$ export LD_LIBRARY_PATHS="$LD_LIBRARY_PATHS:/usr/local/lib"
 ```
 
 Now add nterm as a dependency in your `Cargo.toml` file:
