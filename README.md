@@ -5,7 +5,7 @@ A high level ncurses wrapper for Rust, which makes writing terminal applications
 
 ## Documentation
 
-Found [here](https://gravityscore.github.io/nterm/nterm/index.html).
+Found [here](https://gravityscore.github.io/NTerm/nterm/index.html).
 
 ## Usage
 
