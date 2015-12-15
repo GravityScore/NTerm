@@ -2,6 +2,11 @@
 name = "nterm"
 version = "0.1.0"
 authors = ["Ben Anderson <gravityscore@gmail.com>"]
+description = "A high level ncurses wrapper."
+documentation = "https://gravityscore.github.io/NTerm/nterm/index.html"
+repository = "https://github.com/GravityScore/NTerm"
+keywords = ["ncurses", "wrapper", "tui", "terminal"]
+license = "MIT"
 
 [dependencies]
 ncurses = { git = "https://github.com/jeaye/ncurses-rs" }
