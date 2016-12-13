@@ -1,8 +1,9 @@
 
 //
 //  NTerm
-//! Higher level wrapper around ncurses.
 //
+
+//! Higher level wrapper around ncurses.
 
 extern crate ncurses;
 
@@ -30,7 +31,6 @@ pub enum Color {
 	White = 7,
 }
 
-
 /// Attributes associated with a cell on the terminal.
 #[derive(Clone, Copy)]
 pub struct Attributes {
@@ -39,7 +39,6 @@ pub struct Attributes {
 	pub bold: bool,
 	pub underline: bool,
 }
-
 
 impl Attributes {
 	/// Create a default set of attributes.
@@ -100,7 +99,6 @@ pub enum Cursor {
 	Visible,
 	VeryVisible,
 }
-
 
 impl Cursor {
 	/// Converts a cursor state into an ncurses state.
@@ -205,14 +203,13 @@ pub trait Drawable {
 /// The terminal itself.
 pub struct Terminal;
 
-
 impl Terminal {
 	/// Create a new instance of the termial window. Usually is only called
 	/// once upon program start to initialise ncurses.
 	pub fn new() -> Terminal {
 		ncurses::initscr();
 		ncurses::raw();
-		ncurses::keypad(ncurses::stdscr, true);
+		ncurses::keypad(ncurses::stdscr(), true);
 		ncurses::cbreak();
 		ncurses::noecho();
 		ncurses::mouseinterval(0);
@@ -270,22 +267,22 @@ impl Terminal {
 					bstate: 0,
 				};
 				ncurses::getmouse(&mut event);
-				if event.bstate & BUTTON1_PRESSED as u64 == BUTTON1_PRESSED as u64 {
+				if event.bstate & BUTTON1_PRESSED as u32 == BUTTON1_PRESSED as u32 {
 					Event::MouseDown(event.x as u32, event.y as u32,
 						MouseButton::Left)
-				} else if event.bstate & BUTTON1_RELEASED as u64 == BUTTON1_RELEASED as u64 {
+				} else if event.bstate & BUTTON1_RELEASED as u32 == BUTTON1_RELEASED as u32 {
 					Event::MouseUp(event.x as u32, event.y as u32,
 						MouseButton::Left)
-				} else if event.bstate & BUTTON2_PRESSED as u64 == BUTTON2_PRESSED as u64 {
+				} else if event.bstate & BUTTON2_PRESSED as u32 == BUTTON2_PRESSED as u32 {
 					Event::MouseDown(event.x as u32, event.y as u32,
 						MouseButton::Middle)
-				} else if event.bstate & BUTTON2_RELEASED as u64 == BUTTON2_RELEASED as u64 {
+				} else if event.bstate & BUTTON2_RELEASED as u32 == BUTTON2_RELEASED as u32 {
 					Event::MouseUp(event.x as u32, event.y as u32,
 						MouseButton::Middle)
-				} else if event.bstate & BUTTON3_PRESSED as u64 == BUTTON3_PRESSED as u64 {
+				} else if event.bstate & BUTTON3_PRESSED as u32 == BUTTON3_PRESSED as u32 {
 					Event::MouseDown(event.x as u32, event.y as u32,
 						MouseButton::Right)
-				} else if event.bstate & BUTTON3_RELEASED as u64 == BUTTON3_RELEASED as u64 {
+				} else if event.bstate & BUTTON3_RELEASED as u32 == BUTTON3_RELEASED as u32 {
 					Event::MouseUp(event.x as u32, event.y as u32,
 						MouseButton::Right)
 				} else {
@@ -305,7 +302,6 @@ impl Terminal {
 		}
 	}
 }
-
 
 impl Drawable for Terminal {
 	fn character(&self, ch: AlternativeCharacter, x: u32, y: u32,
@@ -335,7 +331,7 @@ impl Drawable for Terminal {
 	fn size(&self) -> (u32, u32) {
 		let mut width = 0;
 		let mut height = 0;
-		ncurses::getmaxyx(ncurses::stdscr, &mut height, &mut width);
+		ncurses::getmaxyx(ncurses::stdscr(), &mut height, &mut width);
 		(width as u32, height as u32)
 	}
 
@@ -348,7 +344,6 @@ impl Drawable for Terminal {
 	}
 }
 
-
 impl Drop for Terminal {
 	fn drop(&mut self) {
 		ncurses::endwin();
@@ -360,7 +355,6 @@ impl Drop for Terminal {
 pub struct Window {
 	backend: ncurses::WINDOW,
 }
-
 
 impl Window {
 	/// Creates a new window of the specified size, starting at the given
@@ -376,7 +370,6 @@ impl Window {
 		ncurses::mvwin(self.backend, y as i32, x as i32);
 	}
 }
-
 
 impl Drawable for Window {
 	fn character(&self, ch: AlternativeCharacter, x: u32, y: u32,

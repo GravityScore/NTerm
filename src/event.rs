@@ -3,7 +3,6 @@
 //  Event
 //
 
-
 /// All possible keys to press.
 pub enum Key {
 	Up,
@@ -21,14 +20,12 @@ pub enum Key {
 	F(u32),
 }
 
-
 /// Possible mouse buttons that can be pressed.
 pub enum MouseButton {
 	Left,
 	Middle,
 	Right,
 }
-
 
 /// All events that can occur.
 pub enum Event {

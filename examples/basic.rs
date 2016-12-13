@@ -8,7 +8,6 @@ extern crate nterm;
 
 use nterm::{Terminal, Drawable, Attributes, Cursor, Color};
 
-
 fn main() {
 	let term = Terminal::new();
 	term.cursor_state(Cursor::Invisible);

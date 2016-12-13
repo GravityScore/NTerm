@@ -9,4 +9,4 @@ keywords = ["ncurses", "wrapper", "tui", "terminal"]
 license = "MIT"
 
 [dependencies]
-ncurses = { git = "https://github.com/jeaye/ncurses-rs" }
+ncurses = "*"
